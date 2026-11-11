@@ -65,7 +65,6 @@ class NumberTheory:
         return val
 
     @staticmethod
-
     def ext_euclid(a, b):
         """Extended Euclidean algorithm: returns [gcd, x, y] where ax + by = gcd"""
         if a > b:
@@ -90,7 +89,6 @@ class NumberTheory:
 
 class Groups:
     """Modular arithmetic and group theory operations"""
-
     @staticmethod
     def fast_exp(x, y):
         """Fast exponentiation: calculates x^y"""
@@ -167,7 +165,6 @@ class Groups:
 
 class RSA:
     """RSA specific operations"""
-
     @staticmethod
     def factorize_by_trial(n):
         """Factorizes n by finding a prime divisor (trial division)"""
@@ -179,7 +176,6 @@ class RSA:
 
 class Montgomery:
     """Montgomery arithmetic operations"""
-
     @staticmethod
     def gen_radix(n):
         """Generates parameters for Montgomery arithmetic"""
