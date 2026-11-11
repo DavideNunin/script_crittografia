@@ -72,8 +72,8 @@ def remove_dup(a):
     a= list(dict.fromkeys(a))
     return a
 
-n=int(input("inserisci l' ordine del gruppo: "))
+n=int(input("insert the order of the group: "))
 #print(factorize(int(n)))
 #print (phi(int(n)))
-print("il numero dei generatori é: ",phi(n))
+print("the number of generators is: ",phi(n))
 print(remove_dup(find_gen(n)))

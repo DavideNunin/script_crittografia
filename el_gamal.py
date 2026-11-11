@@ -2,8 +2,8 @@
 from crypto_lib import *
 import math
 import random
-print("Questo script è una dimostrazione molto semplice di come funziona l' algoritmo di crittografia asimmetrica el_gamal")
-m = int(input("inserisci il messaggio: "))
+print("This script is a very simple demonstration of how the el_gamal asymmetric cryptography algorithm works")
+m = int(input("insert the message: "))
 bitlength = math.ceil(math.log2(m))
 bitlength = bitlength+1
 n = 10
@@ -22,5 +22,5 @@ gamma = Groups.fast_exp_mod(g, I, n)
 delta = (m*Groups.fast_exp_mod(gs, I, n))%n
 print("delta=",delta)
 print("gamma=",gamma)
-print("decifrando:")
-print("decifrato:", (Groups.fast_exp_mod(gamma,NumberTheory.phi(n)-s,n)*delta)%n )
+print("decrypting:")
+print("decrypted:", (Groups.fast_exp_mod(gamma,NumberTheory.phi(n)-s,n)*delta)%n )

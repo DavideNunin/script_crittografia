@@ -2,10 +2,10 @@
 import time
 import crypto_lib
 import random
-print("Questo script illustra in maniera molto semplificata come funziona la generazione di una coppia di chiavi pubblica/privata per l' algoritmo RSAi, NON è un algoritmo sicuro e non va assolutamente usato nella produzione di vere chiavi RSA")
-print("I nummeri primi vanno scelti con altre tecniche e devono soddisfare certi requisiti pena la creazione di chiavi deboli (devono essere distanti tra di loro)")
-bitq = int(input("dimensione in bit del primo q:"))
-bitp = int(input("dimensione in bit del primo p:"))
+print("This script illustrates in a very simplified way how the generation of a public/private key pair works for the RSA algorithm. It is NOT a secure algorithm and must absolutely not be used in the production of real RSA keys")
+print("Prime numbers must be chosen with other techniques and must meet certain requirements to avoid creating weak keys (they must be far apart from each other)")
+bitq = int(input("bit size of prime q:"))
+bitp = int(input("bit size of prime p:"))
 d = None
 start = time.perf_counter()
 while d is None:
@@ -15,7 +15,7 @@ while d is None:
     q = random.randint(crypto_lib.Groups.fast_exp(2, bitq-1)-1, crypto_lib.Groups.fast_exp(2, bitq)-1)
     while crypto_lib.NumberTheory.isprime(q) is False:
         q -=1
-    print("trovati primi q e p in ",time.perf_counter()-start," secondi")
+    print("found primes q and p in ",time.perf_counter()-start," seconds")
     n = p*q
     phin = (p-1)*(q-1)
     e = 3
@@ -28,7 +28,7 @@ while d is None:
         d = crypto_lib.Groups.mult_inv_euclid(e, phin)
 
 
-print("generazione chiavi completata in ", time.perf_counter()-start, " secondi")
+print("key generation completed in ", time.perf_counter()-start, " seconds")
 print("p: ", p)
 print("q: ", q)
 print("phi: ", phin)
@@ -36,11 +36,11 @@ print("n: ", n)
 print("e: ", e)
 print("d: ", d)
 
-m = int(input("inserire m (<n):"))
+m = int(input("insert m (<n):"))
 start = time.perf_counter()
 c = crypto_lib.Groups.fast_exp_mod(m, e, n)
-print("cifratura completata in ", time.perf_counter()-start, " secondi")
+print("encryption completed in ", time.perf_counter()-start, " seconds")
 print("c =  ", c)
 start = time.perf_counter()
-print("decifrato: ", crypto_lib.Groups.fast_exp_mod(c, d, n))
-print("decifratura completata in ", time.perf_counter()-start, " secondi")
+print("decrypted: ", crypto_lib.Groups.fast_exp_mod(c, d, n))
+print("decryption completed in ", time.perf_counter()-start, " seconds")

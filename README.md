@@ -1,72 +1,51 @@
 # Cryptography Educational Scripts
 
-Questo repository contiene script educativi in Python per comprendere il funzionamento di alcune primitive crittografiche fondamentali.
+This repository contains educational Python scripts to understand how some fundamental cryptographic primitives work.
 
-## 📚 Contenuto
+## 📚 Content
 
-Il modulo `crypto_lib.py` implementa diverse operazioni crittografiche organizzate in classi tematiche:
+The `crypto_lib.py` module implements various cryptographic operations organized in thematic classes:
 
 ### `NumberTheory`
-Operazioni di teoria dei numeri:
-- Test di primalità
-- Fattorizzazione in numeri primi
-- Funzione φ di Eulero
-- Algoritmo esteso di Euclide
-- Calcolo dei divisori
+Number theory operations:
+- Primality test
+- Prime factorization
+- Euler's totient function φ
+- Extended Euclidean algorithm
+- Divisor calculation
 
 ### `Groups`
-Aritmetica modulare e teoria dei gruppi:
-- Esponenziazione veloce (normale e modulare)
-- Calcolo dell'inverso moltiplicativo (3 metodi: brute force, φ di Eulero, Euclide esteso)
-- Ricerca di generatori per gruppi moltiplicativi
+Modular arithmetic and group theory:
+- Fast exponentiation (normal and modular)
+- Multiplicative inverse calculation (3 methods: brute force, Euler's φ, extended Euclid)
+- Search for generators in multiplicative groups
 
 ### `RSA`
-Operazioni specifiche per RSA:
-- Fattorizzazione tramite trial division
+RSA specific operations:
+- Factorization via trial division
 
 ### `Montgomery`
-Aritmetica di Montgomery per calcoli modulari efficienti:
-- Generazione parametri
-- Riduzione di Montgomery
-- Moltiplicazione di Montgomery
+Montgomery arithmetic for efficient modular calculations:
+- Parameter generation
+- Montgomery reduction
+- Montgomery multiplication
 
-## 🚀 Utilizzo
+## 🚀 Usage
 
 ```python
 from crypto_lib import NumberTheory, Groups, RSA, Montgomery
 
-# Test di primalità
+# Primality test
 print(NumberTheory.isprime(17))  # True
 
-# Esponenziazione modulare
+# Modular exponentiation
 result = Groups.fast_exp_mod(3, 5, 7)  # 3^5 mod 7
 
-# Funzione φ di Eulero
+# Euler's totient function φ
 phi_10 = NumberTheory.phi(10)  # 4
 
-# Inverso moltiplicativo
+# Multiplicative inverse
 inv = Groups.mult_inv_euclid(3, 11)  # 4
 
-# Generatore di gruppo
+# Group generator
 gen = Groups.find_generator(11)
-```
-
-## ⚠️ Nota importante
-
-**Questi script sono esclusivamente a scopo educativo e didattico.** Non sono ottimizzati per la produzione e non dovrebbero essere utilizzati in applicazioni reali che richiedono sicurezza crittografica.
-
-Per applicazioni in produzione, utilizzare librerie crittografiche consolidate come:
-- `cryptography`
-- `PyCryptodome`
-- `NaCl/libsodium`
-
-## 📝 Requisiti
-
-- Python 3.x
-- Nessuna dipendenza esterna (solo libreria standard)
-
-## 🎓 Scopo educativo
-
-Questo repository è pensato per:
-- Altri studenti di crittografia che vogliono comprendere gli algoritmi fondamentali
-- Mio personale esercizio

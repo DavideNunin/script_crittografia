@@ -1,6 +1,6 @@
 #! /usr/bin/python3
-print("Questo script serve per visualizzare l' operazione di esponenziazione sulle classi di resto modulo n, l' insieme delle classi di resto è un gruppo ciclico rispetto al prodotto solo se n è un numero primo")
-n=int(input("inserisci la cardinalità del gruppo: "))
+print("This script is used to visualize the exponentiation operation on residue classes modulo n. The set of residue classes is a cyclic group with respect to multiplication only if n is a prime number")
+n=int(input("insert the cardinality of the group: "))
 a=[]
 for i in range (1,n):
     b=[]

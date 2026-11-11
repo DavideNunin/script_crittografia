@@ -2,11 +2,11 @@ import copy
 import math
 
 class NumberTheory:
-    """Operazioni di teoria dei numeri"""
+    """Number theory operations"""
 
     @staticmethod
     def isprime(n):
-        """Verifica se n è primo"""
+        """Checks if n is prime"""
         if n == 2:
             return True
         if n < 2:
@@ -18,7 +18,7 @@ class NumberTheory:
 
     @staticmethod
     def factorize(n):
-        """Fattorizza n e restituisce lista di [primo, esponente]"""
+        """Factorizes n and returns a list of [prime, exponent]"""
         a = n
         ret = []
         i = 2
@@ -35,7 +35,7 @@ class NumberTheory:
 
     @staticmethod
     def divisors(factors):
-        """Trova tutti i divisori dato l'elenco di fattori primi"""
+        """Finds all divisors given the list of prime factors"""
         primefactors = []
         for i in factors:
             for j in range(0, i[1]):
@@ -57,7 +57,7 @@ class NumberTheory:
 
     @staticmethod
     def phi(n):
-        """Calcola la funzione φ di Eulero"""
+        """Calculates Euler's totient function φ"""
         l = NumberTheory.factorize(n)
         val = 1
         for i in l:
@@ -67,7 +67,7 @@ class NumberTheory:
     @staticmethod
 
     def ext_euclid(a, b):
-        """Algoritmo esteso di Euclide: restituisce [gcd, x, y] dove ax + by = gcd"""
+        """Extended Euclidean algorithm: returns [gcd, x, y] where ax + by = gcd"""
         if a > b:
             u = [a, 1, 0]
             v = [b, 0, 1]
@@ -89,11 +89,11 @@ class NumberTheory:
 
 
 class Groups:
-    """Operazioni di aritmetica modulare e teoria dei gruppi"""
+    """Modular arithmetic and group theory operations"""
 
     @staticmethod
     def fast_exp(x, y):
-        """Esponenziazione veloce: calcola x^y"""
+        """Fast exponentiation: calculates x^y"""
         exp = bin(y)[2:]
         if y == 0:
             return 1
@@ -109,7 +109,7 @@ class Groups:
 
     @staticmethod
     def fast_exp_mod(x, y, n):
-        """Esponenziazione modulare veloce: calcola (x^y) mod n"""
+        """Fast modular exponentiation: calculates (x^y) mod n"""
         exp = bin(y)[2:]
         if y == 0:
             return 1
@@ -125,7 +125,7 @@ class Groups:
 
     @staticmethod
     def mult_inv_brute(e, n):
-        """Trova l'inverso moltiplicativo con forza bruta"""
+        """Finds the multiplicative inverse using brute force"""
         for i in range(1, n):
             if (e * i) % n == 1:
                 return i
@@ -133,13 +133,13 @@ class Groups:
 
     @staticmethod
     def mult_inv_phi(e, n):
-        """Trova l'inverso moltiplicativo usando φ di Eulero"""
+        """Finds the multiplicative inverse using Euler's φ"""
         ph = NumberTheory.phi(n)
         return Groups.fast_exp(e, ph - 1) % n
 
     @staticmethod
     def mult_inv_euclid(e, n):
-        """Trova l'inverso moltiplicativo usando l'algoritmo esteso di Euclide"""
+        """Finds the multiplicative inverse using the extended Euclidean algorithm"""
         a = NumberTheory.ext_euclid(e, n)
         if a[0] != 1:
             return None
@@ -149,7 +149,7 @@ class Groups:
 
     @staticmethod
     def find_generator(modulo):
-        """Trova un generatore del gruppo moltiplicativo Z*_modulo"""
+        """Finds a generator of the multiplicative group Z*_modulo"""
         attempts = NumberTheory.divisors(NumberTheory.factorize(NumberTheory.phi(modulo)))
         attempts.sort()
 
@@ -166,11 +166,11 @@ class Groups:
 
 
 class RSA:
-    """Operazioni specifiche per RSA"""
+    """RSA specific operations"""
 
     @staticmethod
     def factorize_by_trial(n):
-        """Fattorizza n cercando un divisore primo (trial division)"""
+        """Factorizes n by finding a prime divisor (trial division)"""
         for i in range(2, math.ceil(math.sqrt(n))):
             if NumberTheory.isprime(i):
                 if n % i == 0:
@@ -178,11 +178,11 @@ class RSA:
         return None
 
 class Montgomery:
-    """Operazioni per l'aritmetica di Montgomery"""
+    """Montgomery arithmetic operations"""
 
     @staticmethod
     def gen_radix(n):
-        """Genera i parametri per l'aritmetica di Montgomery"""
+        """Generates parameters for Montgomery arithmetic"""
         d = math.ceil(math.log2(n))
         d += 1
         r = 2 ** d
@@ -193,15 +193,15 @@ class Montgomery:
 
     @staticmethod
     def reduce(x, n, r, np, d):
-        """Riduzione di Montgomery"""
+        """Montgomery reduction"""
         tp = (x * np) % r
         x = x + n * tp
-        x = x >> d  # Fix: era x << d, dovrebbe essere x >> d
+        x = x >> d  # Fix: was x << d, should be x >> d
         if x >= n:
             x = x - n
         return x
 
     @staticmethod
     def multiply(a, b, n, r, np, d):
-        """Moltiplicazione di Montgomery"""
+        """Montgomery multiplication"""
         return Montgomery.reduce(a * b, n, r, np, d)
